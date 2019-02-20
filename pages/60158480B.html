@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>LE 2.0 Test Page</title>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=UTF-8">
+
+	<style>
+		body{text-align: center;}
+		#main{ min-width: 400px; width:100%;}
+		#part1{min-height:100px; min-width:200px; width:200px; margin:auto;border:1px inset #777;overflow: visible;}
+		#part2{min-height: 400px; background-color:#E6E4E4;}
+		
+	</style>
+	
+</head>
+<body>
+
+<h1>Alpha ENV - Visit Site 60158480<span style="color:red"> LE tag</span></h1>
+<br><br>
+<h2>Page contain DIVID name 'chat' </h2>
+
+<div id="main">
+	<div id="part1">
+		<div id="chat">embedded button placeholder</div>
+	</div>
+	<div id="part2">
+	</div>
+</div>
+
+
+<script language="javascript">
+<!-- BEGIN LivePerson Monitor. -->
+window.lpTag=window.lpTag||{},"undefined"==typeof window.lpTag._tagCount?(window.lpTag={site:'60158480',section:lpTag.section||"",tagletSection:lpTag.tagletSection||null,autoStart:lpTag.autoStart!==!1,ovr:lpTag.ovr||{domain : 'lptag-a.liveperson.net',tagjs : 'tags-a.liveperson.net'},_v:"1.7.0",_tagCount:1,protocol:"https:",events:{bind:function(t,e,i){lpTag.defer(function(){lpTag.events.bind(t,e,i)},0)},trigger:function(t,e,i){lpTag.defer(function(){lpTag.events.trigger(t,e,i)},1)}},defer:function(t,e){0==e?(this._defB=this._defB||[],this._defB.push(t)):1==e?(this._defT=this._defT||[],this._defT.push(t)):(this._defL=this._defL||[],this._defL.push(t))},load:function(t,e,i){var n=this;setTimeout(function(){n._load(t,e,i)},0)},_load:function(t,e,i){var n=t;t||(n=this.protocol+"//"+(this.ovr&&this.ovr.domain?this.ovr.domain:"lptag.liveperson.net")+"/tag/tag.js?site="+this.site);var a=document.createElement("script");a.setAttribute("charset",e?e:"UTF-8"),i&&a.setAttribute("id",i),a.setAttribute("src",n),document.getElementsByTagName("head").item(0).appendChild(a)},init:function(){this._timing=this._timing||{},this._timing.start=(new Date).getTime();var t=this;window.attachEvent?window.attachEvent("onload",function(){t._domReady("domReady")}):(window.addEventListener("DOMContentLoaded",function(){t._domReady("contReady")},!1),window.addEventListener("load",function(){t._domReady("domReady")},!1)),"undefined"==typeof window._lptStop&&this.load()},start:function(){this.autoStart=!0},_domReady:function(t){this.isDom||(this.isDom=!0,this.events.trigger("LPT","DOM_READY",{t:t})),this._timing[t]=(new Date).getTime()},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],ev:lpTag.ev||[]},lpTag.init()):window.lpTag._tagCount+=1;
+<!-- END LivePerson Monitor. -->
+</script>
+
+
+<script>
+        lpTag.events.bind('LPTAG', 'ON_READY', function(){
+            lpTag.site = '60158480';
+            lpTag.protocol = 'http:';
+			lpTag.csds.setDomains([
+                {
+                    "service" : "ACCDN",
+                    "baseURI" : "accdn-a.lpsnmedia.net"
+                },
+                {
+                    "service" : "LPCDN",
+                    "baseURI" : "lpcdn-a.lpsnmedia.net"
+                }
+            ]);
+		});
+		lpTag.sdes.push({"type":"purchase","total":"77.5","orderId":"Test123"});
+	
+</script>
+
+
+<script>var lpMTagConfig={};</script>
+
+<br><br><br>
+<hr/>
+<br><br><br>
+
+<br>
+
+<br>
+<div id="numberid">222.22</div>
+<div class="numberclass">555.55</div>
+<div id="nameid">abc</div>
+<div class="nameclass">xyz</div>
+</body>
+</html>

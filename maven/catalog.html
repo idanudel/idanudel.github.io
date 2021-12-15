@@ -2,19 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <head>
     <meta charset="UTF-8">
     <title>Account Provision Test Page</title>
 </head>
 <body>
 <form  method="GET" name="authenticateForm" id="authenticateForm">
-    <!--idanm.liveperson.com one-->
-    <div class="g-recaptcha" data-sitekey="6Lf8W-gUAAAAABo1H1upytzXNTqA2pk636VqAuil"></div>
-    <!--rapid deploy key-->
-    <!--<div class="g-recaptcha" data-sitekey="6Ld569AUAAAAAJ8bKdSR4QCf5Z09zOBYLXprOlWa"></div>-->
-    
-    <input value="Get Product" type="button" onclick="submitGetProduct()">
+    <input value="Get Product DEV" type="button" onclick="submitGetProductDev()">
+    <input value="Get Product STG" type="button" onclick="submitGetProductStg()">
 </form>
 
 <label id="error" ></label>
@@ -23,14 +18,22 @@
 
     
     
-    function submitGetProduct () {
-        const headers = {
-            "Content-Type":"application/json",
-            "maven-uid":"1c33f76a-79c6-428e-a129-1a5772d241ce",
-            "Authorization":"Bearer syt_bWF2ZW5fYnJhbmRfMzE2MzMzMzM2NjM3MzY2MTJkMzczOTYzMzYyZDM0MzIzODY1MmQ2MTMxMzIzOTJkMzE2MTM1MzczNzMyNjQzMjM0MzE2MzY1_mCGwkaRLtWdMTvcZqwJf_15Scly"
-        };
-        submit("https://stg-api.mavenapp.com/catalog/api/v2/brands/1c33f76a-79c6-428e-a129-1a5772d241ce/products?size=20&page=0&aggregate=onSale,bestSeller", headers)
-    }
+    function submitGetProductStg () {
+            const headers = {
+                "Content-Type":"application/json",
+                "maven-uid":"8c8fbb13-86a6-4404-8191-2af098901e90",
+                "Authorization":"Bearer syt_bWF2ZW5fY29uc3VtZXJfMzg2MzM4NjY2MjYyMzEzMzJkMzgzNjYxMzYyZDM0MzQzMDM0MmQzODMxMzkzMTJkMzI2MTY2MzAzOTM4MzkzMDMxNjUzOTMw_gGRESmafhRAeUuNEQHHU_29r6xG"
+            };
+            submit("https://dev-api.mavenapp.com/catalog/api/v2/brands/8c8fbb13-86a6-4404-8191-2af098901e90/products?size=20&page=0&aggregate=onSale,bestSeller", headers)
+        }    
+    function submitGetProductStg () {
+            const headers = {
+                "Content-Type":"application/json",
+                "maven-uid":"1c33f76a-79c6-428e-a129-1a5772d241ce",
+                "Authorization":"Bearer syt_bWF2ZW5fYnJhbmRfMzE2MzMzMzM2NjM3MzY2MTJkMzczOTYzMzYyZDM0MzIzODY1MmQ2MTMxMzIzOTJkMzE2MTM1MzczNzMyNjQzMjM0MzE2MzY1_mCGwkaRLtWdMTvcZqwJf_15Scly"
+            };
+            submit("https://stg-api.mavenapp.com/catalog/api/v2/brands/1c33f76a-79c6-428e-a129-1a5772d241ce/products?size=20&page=0&aggregate=onSale,bestSeller", headers)
+        }
     
     function submit (url, headers, onSuccess) {
         $.ajax({

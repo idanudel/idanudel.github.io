@@ -1,1 +1,110 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Account Provision Test Page</title>
+</head>
+<body>
+<form  method="POST" name="authenticateForm" id="authenticateForm">
+    <!--idanm.liveperson.com one-->
+    <div class="g-recaptcha" data-sitekey="6Lf8W-gUAAAAABo1H1upytzXNTqA2pk636VqAuil"></div>
+    <!--rapid deploy key-->
+    <!--<div class="g-recaptcha" data-sitekey="6Ld569AUAAAAAJ8bKdSR4QCf5Z09zOBYLXprOlWa"></div>-->
+    <p><label for="email">Email:</label>
+        <input type="text" name="email" id="email" class="email"></p>
+    <input value="Submit" type="button" onclick="submitAuthenticate()">
+</form>
+
+
+<form  method="POST" name="authorization" id="authorizationForm">
+    <p><label for="email">Email:</label>
+        <input type="text" name="email" class="email" ></p>
+    <p><label for="otp">OTP:</label>
+        <input type="text" name="otp" id="otp"></p>
+    <input value="Submit" type="button" onclick="submitAuthorization()">
+</form>
+
+<p><label for="authToken">Auth Token:</label>
+    <label id="authToken" ></label> </p>
+<form method="POST" name="registerForm" id="registerForm">
+    <p><label for="firstName">First Name:</label>
+        <input type="text" name="firstName" value="first name" id="firstName"></p>
+    <p><label for="lastName">Last Name:</label>
+        <input type="text" name="lastName" value="last name" id="lastName"></p>
+    <p><label for="region">Region:</label>
+        <input type="text" name="region" value="z1" id="region"></p>
+    <p><label for="stage">stage:</label>
+        <input type="text" name="stage" value="EB2" id="stage"></p>
+    <p><label for="email">Email:</label>
+        <input type="text" name="email" class="email"></p>
+    <p><label for="businessName">Business Name:</label>
+        <input type="text" name="businessName" value="My Business Name" id="businessName"></p>
+    <p><label for="websiteUrl">Website Url:</label>
+        <input type="text" name="websiteUrl" value="https://liveperson.com" id="websiteUrl"></p>
+    <input value="Submit" type="button" onclick="submitRegister()">
+</form>
+<label id="error" ></label>
+</body>
+<script>
+
+    $('.email').on('change', function(){
+        var $value = $('input').val();
+        $(".email").val($value);
+    });
+
+    let jwt;
+    function submitAuthenticate () {
+        const headers = {
+            "Content-Type":"application/json"
+        };
+        submit("https://mavenconnect-qa.dev.lprnd.net/authenticate", "#authenticateForm", headers)
+    }
+    function submitAuthorization () {
+        const headers = {
+            "Content-Type":"application/json"
+        };
+        submit("https://idanm-mac.dev.lprnd.net/mavenregistration/authorization", "#authorizationForm",headers, (res)=>{
+            console.log(JSON.stringify(res));
+            jwt = res.authToken
+            $("#authToken").append(jwt);
+        })
+    }
+    function submitRegister () {
+        const headers = {
+            "Content-Type":"application/json",
+            "Authorization" : `Bearer ${jwt}`
+        };
+        submit("https://idanm-mac.dev.lprnd.net/mavenregistration/register?v=2.0", "#registerForm", headers)
+    }
+
+    function submit (url, formId, headers, onSuccess) {
+        const formData = JSON.stringify(objectifyForm($(formId).serializeArray()));
+
+        $.ajax({
+            type: "POST",
+            headers : headers,
+            url: url,
+            data: formData,
+            success: onSuccess || function (result) {console.log(JSON.stringify(result));},
+            error :  (xhr, ajaxOptions, thrownError) => {
+                $("#error").append(`Error ${xhr.status}\n ${thrownError} \n ${xhr.responseText}`);
+            },
+            dataType: "json",
+            contentType: "application/json"
+        });
+    }
+
+    function objectifyForm(formArray) {//serialize data function
+
+        var returnArray = {};
+        for (var i = 0; i < formArray.length; i++){
+            returnArray[formArray[i]['name']] = formArray[i]['value'];
+        }
+        return returnArray;
+    }
+
+</script>
+</html>

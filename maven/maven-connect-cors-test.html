@@ -14,6 +14,10 @@
         <input type="text" name="Token Stg" id="tokenStg"></p>
     <input value="Submit" type="button" onclick="submitAuthenticate('stg')">
 </form>
+    
+    <form  method="POST" name="authorizationPrd" id="authorizationFormPrd">
+    <input value="Submit" type="button" onclick="submitAuthenticate('prd_ca')">
+</form>
 
 <form  method="POST" name="authorizationPrd" id="authorizationFormPrd">
     <p><label for="tokenPrd">Token Prd:</label>
@@ -24,7 +28,17 @@
 <script>
 
     function submitAuthenticate (env) {
-        const url = env === "stg" ? "https://va-a.mavenconnect.liveperson.net/api/v2/brands/817dcaad-dddf-46b2-b03b-139c7aad2068/access": "https://va.mavenconnect.liveperson.net/api/v2/brands/b5eb8fe1-344e-459c-8a1b-adfb0567a16e/access";
+    const url;
+        if(env === "stg"){
+          url = "https://va-a.mavenconnect.liveperson.net/api/v2/brands/817dcaad-dddf-46b2-b03b-139c7aad2068/access";
+        }
+        if(env === "prd"){
+          url = "https://va.mavenconnect.liveperson.net/api/v2/brands/b5eb8fe1-344e-459c-8a1b-adfb0567a16e/access";
+        }
+        if(env === "prd_ca"){
+          url = "https://ca.mavenconnect.liveperson.net/api/v2/brands/b5eb8fe1-344e-459c-8a1b-adfb0567a16e/access";
+        }
+
         const jwt = env === "stg" ? $( "#tokenStg" ).val(): $( "#tokenPrd" ).val();
         const headers = {
             "Content-Type":"application/json",

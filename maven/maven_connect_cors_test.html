@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Account Provision Test Page</title>
+</head>
+<body>
+
+
+<form  method="POST" name="authorizationStg" id="authorizationFormStg">
+    <p><label for="tokenStg">Token Stg:</label>
+        <input type="text" name="Token Stg" id="tokenStg"></p>
+    <input value="Submit" type="button" onclick="submitAuthenticate('stg')">
+</form>
+
+<form  method="POST" name="authorizationPrd" id="authorizationFormPrd">
+    <p><label for="tokenPrd">Token Prd:</label>
+        <input type="text" name="Token Prd" id="tokenPrd"></p>
+    <input value="Submit" type="button" onclick="submitAuthenticate('prd')">
+</form>
+
+<script>
+
+    function submitAuthenticate (env) {
+        const url = env === "stg" ? "https://va-a-mavenconnect.liveperson.net/api/v2/brands/817dcaad-dddf-46b2-b03b-139c7aad2068/access": "https://va-mavenconnect.liveperson.net/api/v2/brands/b5eb8fe1-344e-459c-8a1b-adfb0567a16e/access";
+        const jwt = env === "stg" ? $( "#tokenStg" ).val(): $( "#tokenPrd" ).val();
+        const headers = {
+            "Content-Type":"application/json",
+            "Authorization" : `Bearer ${jwt}`
+        };
+        
+        submit(url, headers);
+    }
+    function submit (url, headers, onSuccess) {
+
+        $.ajax({
+            type: "POST",
+            headers : headers,
+            url: url,
+            success: onSuccess || function (result) {console.log(JSON.stringify(result));},
+            error :  (xhr, ajaxOptions, thrownError) => {
+                $("#error").append(`Error ${xhr.status}\n ${thrownError} \n ${xhr.responseText}`);
+            },
+            dataType: "json",
+            contentType: "application/json"
+        });
+    }
+</script>
+</html>

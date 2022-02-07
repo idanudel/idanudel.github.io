@@ -35,7 +35,7 @@
     function submit (url, headers, onSuccess) {
 
         $.ajax({
-            type: "POST",
+            type: "GET",
             headers : headers,
             url: url,
             success: onSuccess || function (result) {console.log(JSON.stringify(result));},
